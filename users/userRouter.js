@@ -10,10 +10,14 @@ router.post("/", (req, res) => {
 
   userDb
     .insert(newUser)
-    .then(user => console.log(user))
-    .catch(err => console.log(err));
-
-  res.status(201).json({ successMessage: "Your user was created" });
+    .then(user => {
+      console.log(user);
+      res.status(201).json({ successMessage: "Your user was created" });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(404).json({ errorMessage: "Not able to create user" });
+    });
 });
 
 router.post("/:id/posts", (req, res) => {
