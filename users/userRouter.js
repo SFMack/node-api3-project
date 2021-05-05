@@ -1,32 +1,46 @@
-const express = require('express');
+const express = require("express");
 
 const router = express.Router();
 
-router.post('/', (req, res) => {
+const userDb = require("./userDb.js");
+
+router.post("/", (req, res) => {
+  // do your magic!
+  const newUser = req.body;
+
+  userDb
+    .insert(newUser)
+    .then(user => {
+      console.log(user);
+      res.status(201).json({ successMessage: "Your user was created" });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(404).json({ errorMessage: "Not able to create user" });
+    });
+});
+
+router.post("/:id/posts", (req, res) => {
   // do your magic!
 });
 
-router.post('/:id/posts', (req, res) => {
+router.get("/", (req, res) => {
   // do your magic!
 });
 
-router.get('/', (req, res) => {
+router.get("/:id", (req, res) => {
   // do your magic!
 });
 
-router.get('/:id', (req, res) => {
+router.get("/:id/posts", (req, res) => {
   // do your magic!
 });
 
-router.get('/:id/posts', (req, res) => {
+router.delete("/:id", (req, res) => {
   // do your magic!
 });
 
-router.delete('/:id', (req, res) => {
-  // do your magic!
-});
-
-router.put('/:id', (req, res) => {
+router.put("/:id", (req, res) => {
   // do your magic!
 });
 
